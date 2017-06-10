@@ -66,3 +66,31 @@ def subtractVectors(vector1, vector2):
 	for coord in differenceVector:
 		print coord
 
+
+def multiplyScalarAndVector(scalar1, vector1):
+
+	#create empty sum list
+	productVector = []
+
+
+	for n in range(len(vector1)):
+		#set the number of significant digits. For some reason 4 means 3 decimal places
+		getcontext().prec = 4
+		product = (scalar1) * (vector1[n])
+		product.append(productVector)
+
+	print"***VECTOR MULTIPLICATION***"
+	print "scalar is:"
+	print scalar1
+
+	print ""
+
+	print "vector:"
+	for coord in vector1:
+		print coord
+
+	print ""
+
+	print "scalar * vector:"
+	for coord in productVector:
+		print coord
