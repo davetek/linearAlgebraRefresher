@@ -77,7 +77,7 @@ def multiplyScalarAndVector(scalar1, vector1):
 		#set the number of significant digits. For some reason 4 means 3 decimal places
 		getcontext().prec = 4
 		product = (scalar1) * (vector1[n])
-		product.append(productVector)
+		productVector.append(product)
 
 	print"***VECTOR MULTIPLICATION***"
 	print "scalar is:"
