@@ -39,7 +39,7 @@ def addVectors(vector1, vector2):
 
 def subtractVectors(vector1, vector2):
 
-	#create empty sum list
+	#create empty difference list
 	differenceVector = []
 
 
@@ -67,26 +67,26 @@ def subtractVectors(vector1, vector2):
 		print coord
 
 
-def multiplyScalarAndVector(scalar1, vector1):
+def multiplyScalarAndVector(scalar, vector):
 
-	#create empty sum list
+	#create empty product list
 	productVector = []
 
 
-	for n in range(len(vector1)):
+	for n in range(len(vector)):
 		#set the number of significant digits. For some reason 4 means 3 decimal places
 		getcontext().prec = 4
-		product = (scalar1) * (vector1[n])
+		product = (scalar) * (vector[n])
 		productVector.append(product)
 
 	print"***VECTOR MULTIPLICATION***"
 	print "scalar is:"
-	print scalar1
+	print scalar
 
 	print ""
 
 	print "vector:"
-	for coord in vector1:
+	for coord in vector:
 		print coord
 
 	print ""
