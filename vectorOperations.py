@@ -15,7 +15,7 @@ def addVectors(vector1, vector2):
 
 	for i in range(len(vector1)):
 		#set the number of significant digits. For some reason 4 means 3 decimal places
-		getcontext().prec = 4
+		getcontext().prec = 10
 		sum = Decimal(vector1[i]) + Decimal(vector2[i])
 		sumVector.append(sum)
 
@@ -34,7 +34,7 @@ def addVectors(vector1, vector2):
 
 	print "vector 1 + vector 2 is "
 	for coord in sumVector:
-		print coord
+		print round(coord,3)
 
 
 def subtractVectors(vector1, vector2):
@@ -45,7 +45,7 @@ def subtractVectors(vector1, vector2):
 
 	for n in range(len(vector1)):
 		#set the number of significant digits. For some reason 4 means 3 decimal places
-		getcontext().prec = 4
+		getcontext().prec = 10
 		difference = Decimal(vector1[n]) - Decimal(vector2[n])
 		differenceVector.append(difference)
 
@@ -64,7 +64,7 @@ def subtractVectors(vector1, vector2):
 
 	print "vector 1 - vector 2 is "
 	for coord in differenceVector:
-		print coord
+		print round(coord,3)
 
 
 def multiplyScalarAndVector(scalar, vector):
@@ -75,7 +75,6 @@ def multiplyScalarAndVector(scalar, vector):
 
 	for n in range(len(vector)):
 		#set the number of significant digits. For some reason 4 means 3 decimal places
-		getcontext().prec = 4
 		product = (scalar) * (vector[n])
 		productVector.append(product)
 
@@ -93,4 +92,4 @@ def multiplyScalarAndVector(scalar, vector):
 
 	print "scalar * vector:"
 	for coord in productVector:
-		print coord
+		print round(coord,3)

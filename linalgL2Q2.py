@@ -19,8 +19,8 @@ print ""
 
 #Lesson 2: 1.4 Quiz ex 2
 #declare the vectors to perform operations on
-inputVector1 = [7.119, -8.223]
-inputVector2 = [-8.215, 0.878]
+inputVector1 = [7.119, 8.215]
+inputVector2 = [-8.223, 0.878]
 
 vectorOperations.subtractVectors(inputVector1, inputVector2)
 
