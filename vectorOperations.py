@@ -5,91 +5,60 @@
 
 #import decimal module to retain significant decimal places in operations
 from decimal import *
+import math
 
 
-def addVectors(vector1, vector2):
+# for Lesson 2, Quiz 4
 
-	#create empty sum list
-	sumVector = []
-
-
-	for i in range(len(vector1)):
-		#set the number of significant digits. For some reason 4 means 3 decimal places
-		getcontext().prec = 10
-		sum = Decimal(vector1[i]) + Decimal(vector2[i])
-		sumVector.append(sum)
-
-	print"***VECTOR ADDITION***"
-	print "vector 1 is:"
-	for coord in vector1:
-		print coord
-
-	print ""
-
-	print "vector 2 is:"
-	for coord in vector2:
-		print coord
-
-	print ""
-
-	print "vector 1 + vector 2 is "
-	for coord in sumVector:
-		print round(coord,3)
+## inside a list comprehension, unpack the list of lists (vectors) parameter
+## and zip the unpacked lists to produce new lists, one list for each coordinate (item#)
+##  then use a list comprehension with sum() to sum each of the zipped lists
+##  and return the resulting list which is the sum of the input vectors
+def addVectors(listOfVectors):
+	
+	sumVectors = [ sum(listOfSameCoordinate) for listOfSameCoordinate in zip(*listOfVectors)]
+	return sumVectors
 
 
-def subtractVectors(vector1, vector2):
+## inside a list comprehension, unpack the list of lists (vectors) parameter
+## and zip the unpacked lists to produce new lists, one list for each coordinate (item#)
+##  then use a list comprehension with with reduce() to get the difference of the items in each zipped list
+##  by computing (item 1 - item 2, then result - item 3, and so on)
+##  and return the resulting list which is the difference of the input of the input vectors
+def subtractVectors(listOfVectors):
 
-	#create empty difference list
-	differenceVector = []
+	differenceOfVectors = [ reduce(lambda a, b: a - b, listOfSameCoordinate) for listOfSameCoordinate in zip(*listOfVectors)]
+	return differenceOfVectors
 
-
-	for n in range(len(vector1)):
-		#set the number of significant digits. For some reason 4 means 3 decimal places
-		getcontext().prec = 10
-		difference = Decimal(vector1[n]) - Decimal(vector2[n])
-		differenceVector.append(difference)
-
-	print"***VECTOR SUBTRACTION***"
-	print "vector 1 is:"
-	for coord in vector1:
-		print coord
-
-	print ""
-
-	print "vector 2 is:"
-	for coord in vector2:
-		print coord
-
-	print ""
-
-	print "vector 1 - vector 2 is "
-	for coord in differenceVector:
-		print round(coord,3)
 
 
 def multiplyScalarAndVector(scalar, vector):
 
-	#create empty product list
-	productVector = []
+	productOfScalarAndVector = [ scalar*coordinate for coordinate in vector]
+	return productOfScalarAndVector
 
 
-	for n in range(len(vector)):
-		#set the number of significant digits. For some reason 4 means 3 decimal places
-		product = (scalar) * (vector[n])
-		productVector.append(product)
 
-	print"***VECTOR MULTIPLICATION***"
-	print "scalar is:"
-	print scalar
+##created for Lesson2.1, Quiz 6
 
-	print ""
+def vectorMagnitude(vector):
 
-	print "vector:"
-	for coord in vector:
-		print coord
+	## use a list comprehension to square each coordinate in the input vector
+	vectorCoordinatesSquared = [coordinate**2 for coordinate in vector]
 
-	print ""
+	##compute the square root of the (sum of the squared coordinates as a float)
+	vectorMagnitude = math.sqrt(math.fsum(vectorCoordinatesSquared))
+	return vectorMagnitude
 
-	print "scalar * vector:"
-	for coord in productVector:
-		print round(coord,3)
+
+def vectorDirection(vector):
+	magnitudeOfVector = vectorMagnitude(vector)
+	if magnitudeOfVector != 0:
+		scalar = 1/magnitudeOfVector
+		vectorDirection = multiplyScalarAndVector(scalar, vector)
+		return vectorDirection
+	else:
+		return []
+
+
+
