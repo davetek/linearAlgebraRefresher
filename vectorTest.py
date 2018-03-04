@@ -15,3 +15,9 @@ print('sum: ' + str(sumOfVectors.coordinates))
 
 differenceOfVectors = bVector.subtractVectorFromVector(vVector)
 print('difference: ' + str(differenceOfVectors.coordinates))
+
+
+s = 4
+
+productOfVectorAndScalar = vVector.multiplyScalarAndVector(s)
+print('product of vector and scalar: ' + str(productOfVectorAndScalar.coordinates))

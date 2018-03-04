@@ -36,6 +36,11 @@ class Vector(object):
         list = [ item.quantize(Decimal('.001'), rounding=ROUND_HALF_UP) for item in list]
         return list
 
+    #DL quantize a Decimal scalar value to round to three decimal places
+    def quantizeScalar(self, scalar):
+        scalar = scalar.quantize(Decimal('.001'), rounding = ROUND_HALF_UP)
+        return scalar
+
 
     #DL Add two vectors: self and another vector
     def addVectors(self, v):
@@ -72,4 +77,19 @@ class Vector(object):
             raise ValueError('The vectors must have the same number of coordinates')
 
 
+    def multiplyScalarAndVector(self, scalar):
+
+        #convert scalar to Decimal type
+        scalar = Decimal(scalar)
+        scalar = self.quantizeScalar(scalar)
+
+        #convert each member in this Vector object's coordinates list to a Decimal type
+        vector = [Decimal(coordinate) for coordinate in self.coordinates]
+
+        product = [scalar*coordinate for coordinate in vector]
+
+        #quantize (round) result to three decimal places
+        product = self.quantizeList(product)
+
+        return Vector(product)
 
