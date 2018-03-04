@@ -9,9 +9,9 @@ b = [0.825, 2.036]
 vVector = vector.Vector(v)
 bVector = vector.Vector(b)
 
-sumVectors = bVector.addVectors(vVector)
-print(sumVectors)
+sumOfVectors = bVector.addVectors(vVector)
+print('sum: ' + str(sumOfVectors.coordinates))
 
 
 differenceOfVectors = bVector.subtractVectorFromVector(vVector)
-print(differenceOfVectors)
+print('difference: ' + str(differenceOfVectors.coordinates))

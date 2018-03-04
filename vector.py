@@ -1,6 +1,6 @@
 
 from functools import reduce
-from decimal import Decimal, getcontext, ROUND_UP
+from decimal import Decimal, getcontext, ROUND_HALF_UP
 
 class Vector(object):
 
@@ -29,17 +29,30 @@ class Vector(object):
         return self.coordinates == v.coordinates
 
 
+
+    #DL Helper method to quantize the Decimal members in a coordinate list
+    #round the Decimal coordinates to three decimal places
+    def quantizeList(self, list):
+        list = [ item.quantize(Decimal('.001'), rounding=ROUND_HALF_UP) for item in list]
+        return list
+
+
     #DL Add two vectors: self and another vector
     def addVectors(self, v):
         try:
             if not self.dimension == v.dimension:
                 raise ValueError
 
-            sumVectors = [sum(listOfSameCoordinate) for listOfSameCoordinate in zip(self.coordinates, v.coordinates)]
-            return sumVectors
+            sumOfVectors = [Decimal(x) + Decimal(y) for x,y in zip(self.coordinates, v.coordinates)]
+
+            #quantize (round) the Decimal coordinates to three decimal places
+            sumOfVectors = self.quantizeList(sumOfVectors)
+
+            return Vector(sumOfVectors)
 
         except ValueError:
             raise ValueError('The vectors must have the same number of coordinates')
+
 
 
     def subtractVectorFromVector(self, v):
@@ -48,13 +61,12 @@ class Vector(object):
                 raise ValueError
 
             #subtract the indicated vector v from this vector, and convert each resulting coordinate to a Decimal
-            differenceOfVectors = [ (Decimal(listOfSameCoordinate[0]) - Decimal(listOfSameCoordinate[1])) \
-            for listOfSameCoordinate in zip(self.coordinates, v.coordinates)]
+            differenceOfVectors = [ Decimal(x) - Decimal(y) for x,y in zip(self.coordinates, v.coordinates)]
 
-            #round the Decimal coordinates to three decimal places
-            differenceOfVectors = [ coordinate.quantize(Decimal('.001'), rounding=ROUND_UP) for coordinate in differenceOfVectors]
+            #quantize (round) the Decimal coordinates to three decimal places
+            differenceOfVectors = self.quantizeList(differenceOfVectors)
             
-            return differenceOfVectors
+            return Vector(differenceOfVectors)
 
         except ValueError:
             raise ValueError('The vectors must have the same number of coordinates')
