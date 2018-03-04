@@ -79,17 +79,11 @@ class Vector(object):
 
     def multiplyScalarAndVector(self, scalar):
 
-        #convert scalar to Decimal type
-        scalar = Decimal(scalar)
-        scalar = self.quantizeScalar(scalar)
-
         #convert each member in this Vector object's coordinates list to a Decimal type
-        vector = [Decimal(coordinate) for coordinate in self.coordinates]
-
-        product = [scalar*coordinate for coordinate in vector]
+        productOfScalarAndVector = [Decimal(scalar) * Decimal(coordinate) for coordinate in self.coordinates]
 
         #quantize (round) result to three decimal places
-        product = self.quantizeList(product)
+        productOfScalarAndVector = self.quantizeList(productOfScalarAndVector)
 
-        return Vector(product)
+        return Vector(productOfScalarAndVector)
 
